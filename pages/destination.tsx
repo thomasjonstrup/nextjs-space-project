@@ -17,7 +17,7 @@ const Home: NextPage = () => {
 						letter-spacing-1
 					'
 				>
-					So, you want to travel to
+					So, you want to travel to 2
 					<span className='d-block fs-900 ff-serif text-white'>
 						Space
 					</span>
