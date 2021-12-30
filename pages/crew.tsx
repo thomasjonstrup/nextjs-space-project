@@ -67,7 +67,7 @@ const Crew: NextPage = () => {
 				<h1 className='numbered-title'>
 					<span>02</span>Meet Your Crew
 				</h1>
-				<picture id='europa-image'>
+				<picture>
 					<source
 						srcSet={currentCrewMember.images.webp}
 						type='image/webp'

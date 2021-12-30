@@ -392,6 +392,7 @@ h1 {
 
 .logo {
 	margin: 1.5rem clamp(1.5rem, 5vw, 3.5rem);
+	width: 2rem;
 }
 
 .primary-header {
@@ -714,6 +715,7 @@ body {
 	grid-area: image;
 	max-width: 60%;
 	border-bottom: 1px solid hsl(var(--clr-white) / 0.1);
+	transition: all 0.5s ease-in-out;
 }
 
 .grid-container--crew > .tab-list {

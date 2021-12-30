@@ -74,7 +74,7 @@ const Destination: NextPage = () => {
 			<h1 className='numbered-title'>
 				<span>01</span>Pick your destination
 			</h1>
-			<picture id='europa-image'>
+			<picture>
 				<source
 					srcSet={currentDestination.images.webp}
 					type='image/webp'
