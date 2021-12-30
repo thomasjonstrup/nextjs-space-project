@@ -1,12 +1,66 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import Nav from './Nav';
 
 type Props = {
 	page: string;
+	extraClassName?: string;
 };
 
-const Layout: React.FC<Props> = ({ children, page = 'home' }) => {
+const Layout: React.FC<Props> = ({
+	children,
+	page = 'home',
+	extraClassName,
+}) => {
+	const [openMenu, setOpenMenu] = useState(false);
+
+	useEffect(() => {
+		document.body.className = page;
+	}, [page]);
+
+	let mainClassNames: string = `grid-container grid-container--${page}`;
+
+	if (extraClassName) {
+		mainClassNames += ` ${extraClassName}`;
+	}
+
+	/* 	const nav = document.querySelector('.primary-navigation');
+	const navToggle = document.querySelector('.mobile-nav-toggle');
+
+	// when someone clicks the hamburger button
+	navToggle.addEventListener(
+		'click',
+		function () {
+			// if the nav is closed, open it
+
+			const visibility = nav.getAttribute('data-visible');
+			console.log('visibility :>> ', visibility);
+
+			if (visibility === 'false') {
+				nav.setAttribute('data-visible', true);
+				navToggle.setAttribute('aria-expanded', true);
+			} else {
+				nav.setAttribute('data-visible', false);
+				navToggle.setAttribute('aria-expanded', false);
+			}
+
+			if (!navToggle.classList.contains('mobile-nav-toggle--close')) {
+				navToggle.classList.add('mobile-nav-toggle--close');
+			} else {
+				navToggle.classList.remove('mobile-nav-toggle--close');
+			}
+		},
+		false
+	);
+ */
+
+	const handleClick = () => {
+		console.log('handleClick :>> ', openMenu);
+		setOpenMenu(!openMenu);
+	};
+
 	return (
 		<>
 			<Head>
@@ -34,84 +88,21 @@ const Layout: React.FC<Props> = ({ children, page = 'home' }) => {
 					</a>
 				</Link>
 				<button
-					className='mobile-nav-toggle'
+					className={
+						openMenu
+							? 'mobile-nav-toggle mobile-nav-toggle--close'
+							: 'mobile-nav-toggle'
+					}
 					aria-controls='primary-navigation'
-					aria-expanded='false'
+					aria-expanded={openMenu}
+					onClick={handleClick}
 				>
 					<span className='sr-only'>Menu</span>
 				</button>
-				<nav>
-					<ul
-						id='primary-navigation'
-						data-visible='false'
-						className='primary-navigation underline-indicators flex'
-					>
-						<li className='active'>
-							<Link href='/'>
-								<a
-									className='
-								uppercase
-								text-white
-								ff-sans-cond
-								letter-spacing-2
-							'
-								>
-									<span aria-hidden='true'>00</span> Home
-								</a>
-							</Link>
-						</li>
-						<li>
-							<Link href='/destination'>
-								<a
-									className='
-								uppercase
-								text-white
-								ff-sans-cond
-								letter-spacing-2
-							'
-								>
-									<span aria-hidden='true'>01</span>{' '}
-									Destination
-								</a>
-							</Link>
-						</li>
-						<li>
-							<Link href='/crew'>
-								<a
-									className='
-								uppercase
-								text-white
-								ff-sans-cond
-								letter-spacing-2
-							'
-								>
-									<span aria-hidden='true'>02</span> Crew
-								</a>
-							</Link>
-						</li>
-						<li>
-							<Link href='/technology'>
-								<a
-									className='
-								uppercase
-								text-white
-								ff-sans-cond
-								letter-spacing-2
-							'
-								>
-									<span aria-hidden='true'>03</span>{' '}
-									Technology
-								</a>
-							</Link>
-						</li>
-					</ul>
-				</nav>
+				<Nav openMobile={openMenu} />
 			</header>
 
-			<main
-				id='main'
-				className={`grid-container grid-container--${page}`}
-			>
+			<main id='main' className={mainClassNames}>
 				{children}
 			</main>
 

@@ -104,6 +104,7 @@ body {
 	overflow-x: hidden;
 	display: grid;
 	grid-template-rows: min-content 1fr;
+	transition: background 0.3s ease-in;
 }
 
 /* make images easier to work with */
@@ -746,6 +747,63 @@ body {
 	color: hsl(var(--clr-white) / 0.5);
 }
 
+/* Technology */
+.technology {
+	background-image: url('../public/assets/technology/background-technology-mobile.jpg');
+}
+
+@media (min-width: 35em) {
+	.technology {
+		background-position: center center;
+		background-image: url('../public/assets/technology/background-technology-tablet.jpg');
+	}
+}
+@media (min-width: 45em) {
+	.technology {
+		background-image: url('../public/assets/technology/background-technology-desktop.jpg');
+	}
+}
+
+.grid-container--technology {
+	--flow-space: 2rem;
+	grid-template-areas: 'title' 'image' 'tabs' 'content';
+	padding-inline: 0rem;
+}
+
+.grid-container--technology > picture {
+	grid-area: image;
+	/* 	max-width: 60%; */
+	border-bottom: 1px solid hsl(var(--clr-white) / 0.1);
+}
+
+.grid-container--technology > .numbers-list {
+	grid-area: tabs;
+	flex-direction: row;
+}
+
+.grid-container--technology > .tech-info {
+	grid-area: content;
+}
+
+.grid-container--technology > .dot-indicators {
+	grid-area: tabs;
+}
+
+.grid-container--technology > .crew-details {
+	grid-area: content;
+}
+
+@media (min-width: 35em) {
+	.grid-container--crew {
+		padding-bottom: 0;
+		grid-template-areas:
+			'title'
+			'content'
+			'tabs'
+			'image';
+	}
+}
+
 @media (min-width: 45em) {
 	.grid-container {
 		text-align: left;
@@ -795,5 +853,24 @@ body {
 			'. title title .'
 			'. content image .'
 			'. tabs image .';
+	}
+
+	.grid-container--technology {
+		grid-template-columns:
+			minmax(1rem, 1fr) minmax(5rem, 1fr) minmax(0, 37rem)
+			minmax(0, 23rem) minmax(1rem, 1fr);
+		justify-items: start;
+		grid-template-areas:
+			'title title title title .'
+			'. tabs content image .'
+			'. . . image .';
+	}
+
+	.grid-container--technology > .numbers-list {
+		flex-direction: column;
+	}
+
+	.grid-container--technology > *:first-child {
+		grid-column: 3;
 	}
 }
