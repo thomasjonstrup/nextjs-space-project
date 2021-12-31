@@ -16,6 +16,7 @@ const Layout: React.FC<Props> = ({
 		<nav>
 			<ul
 				data-visible={openMobile}
+				id='primary-navigation'
 				className='primary-navigation underline-indicators flex'
 			>
 				<NavLink href='/'>
